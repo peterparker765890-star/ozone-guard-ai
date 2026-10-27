@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050b16">
+<meta name="description" content="Ozone Guard AI — an interactive environmental awareness platform exploring ozone science, UV protection and sustainable action.">
+<title>OZONE GUARD AI | Protect Our Atmosphere</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#050b16;
+  --panel:#0b1626;
+  --panel2:#0e1d30;
+  --cyan:#55eaff;
+  --green:#70f5bd;
+  --blue:#6095ff;
+  --text:#eff8ff;
+  --muted:#91a6bb;
+  --line:rgba(140,200,255,.13);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'DM Sans',sans-serif;line-height:1.65;
+  overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+  background:
+    radial-gradient(ellipse at 75% 8%,rgba(28,112,180,.15),transparent 40%),
+    radial-gradient(ellipse at 5% 45%,rgba(25,100,110,.09),transparent 35%);
+}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+button{cursor:pointer}
+.wrap{width:min(1160px,90%);margin:auto}
+header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(5,11,22,.86);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line)
+}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:1px}
+.brand-icon{
+  width:37px;height:37px;border-radius:12px;display:grid;place-items:center;
+  color:#04101a;background:linear-gradient(135deg,var(--cyan),var(--green));
+  font-size:21px;box-shadow:0 0 24px #55eaff35
+}
+.brand small{display:block;font-size:9px;color:var(--muted);letter-spacing:3px}
+nav{display:flex;gap:25px;align-items:center}
+nav a{font-size:12px;color:#b5c7d8;transition:.2s}
+nav a:hover{color:var(--cyan)}
+.nav-cta,.btn{
+  border:1px solid var(--cyan);border-radius:8px;padding:11px 17px;
+  font-size:12px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  transition:.25s
+}
+.nav-cta,.btn-primary{background:var(--cyan);color:#04101a}
+.btn:hover,.nav-cta:hover{transform:translateY(-2px);box-shadow:0 0 25px #55eaff35}
+.btn-secondary{color:var(--text);border-color:#ffffff32;background:#ffffff06}
+.menu-btn{display:none;background:none;border:1px solid var(--line);color:white;padding:7px 11px;border-radius:8px}
+
+.hero{min-height:650px;display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:20px;padding:70px 0 80px}
+.eyebrow{color:var(--green);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.dot{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 14px var(--green)}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;line-height:1.12}
+h1{font-size:clamp(42px,6vw,76px);letter-spacing:-3px;margin:24px 0}
+h1 span{color:var(--cyan)}
+.hero p{color:var(--muted);max-width:510px;font-size:15px;line-height:1.9}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin:29px 0}
+.hero-meta{display:flex;gap:25px;flex-wrap:wrap;margin-top:35px;padding-top:24px;border-top:1px solid var(--line)}
+.hero-meta strong{display:block;font-size:19px;font-family:'Space Grotesk',sans-serif}
+.hero-meta small{font-size:10px;color:var(--muted)}
+.earth-stage{min-height:420px;position:relative;display:grid;place-items:center;isolation:isolate}
+.earth{
+  width:min(360px,78vw);aspect-ratio:1;border-radius:50%;position:relative;overflow:hidden;
+  background:
+    radial-gradient(ellipse at 30% 32%,#c0faff 0%,#428fd6 8%,transparent 27%),
+    radial-gradient(ellipse at 65% 40%,#83d7a6 0%,#267d8a 15%,transparent 27%),
+    radial-gradient(ellipse at 30% 72%,#1a6689 0%,transparent 28%),
+    radial-gradient(circle at 35% 35%,#3287c9,#092647 55%,#020814 75%);
+  box-shadow:inset -30px -15px 70px #01040c,inset 9px 2px 35px #8cefff65,0 0 35px #42d9ff25;
+  animation:float 7s ease-in-out infinite;
+}
+.earth:before{
+  content:"";position:absolute;inset:-2px;border-radius:50%;
+  background:repeating-linear-gradient(0deg,transparent 0px,transparent 20px,#a1f2ff17 21px,#a1f2ff17 22px);
+  opacity:.7
+}
+.earth:after{
+  content:"";position:absolute;inset:-2px;border-radius:50%;
+  background:linear-gradient(115deg,transparent 35%,#b7fbff1a 45%,transparent 60%);
+}
+.orbit{position:absolute;width:min(425px,92vw);aspect-ratio:1;border:1px solid #55eaff32;border-radius:50%;transform:rotate(-23deg)}
+.orbit:before{content:"";position:absolute;top:14%;left:15%;width:9px;height:9px;background:var(--cyan);border-radius:50%;box-shadow:0 0 20px var(--cyan)}
+.orbit2{position:absolute;width:min(480px,103vw);aspect-ratio:1;border:1px dashed #70f5bd22;border-radius:50%;transform:rotate(52deg)}
+.float-label{position:absolute;background:#091828e8;border:1px solid #7aeaff38;border-radius:10px;padding:12px 15px;backdrop-filter:blur(10px);font-size:10px;color:var(--muted);box-shadow:0 15px 45px #0005}
+.float-label strong{display:block;font-size:13px;color:white}
+.label-one{top:12%;right:0}
+.label-two{bottom:13%;left:0}
+@keyframes float{50%{transform:translateY(-10px)}}
+.section{padding:95px 0;border-top:1px solid var(--line)}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:35px}
+.kicker{color:var(--cyan);font-size:10px;letter-spacing:3px;font-weight:700;text-transform:uppercase}
+h2{font-size:clamp(30px,4vw,45px);letter-spacing:-1.5px;margin-top:10px}
+.section-head p{max-width:390px;color:var(--muted);font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.card{
+  border:1px solid var(--line);background:linear-gradient(145deg,#0c1a2b,#081321);
+  border-radius:15px;padding:24px;transition:.25s;position:relative;overflow:hidden
+}
+.card:hover{transform:translateY(-5px);border-color:#55eaff65;box-shadow:0 15px 40px #0002}
+.card-icon{width:45px;height:45px;border:1px solid #55eaff35;background:#55eaff0c;border-radius:12px;display:grid;place-items:center;font-size:22px;margin-bottom:24px}
+.card h3{font-size:19px;margin-bottom:10px}
+.card p{font-size:12px;color:var(--muted);line-height:1.85}
+.card-link{display:inline-block;color:var(--cyan);font-size:11px;font-weight:700;margin-top:19px}
+.tag{display:inline-block;font-size:9px;letter-spacing:1px;text-transform:uppercase;border:1px solid #70f5bd40;color:var(--green);padding:5px 8px;border-radius:5px;margin-bottom:12px}
+
+.dashboard{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+.big-card{border:1px solid var(--line);background:linear-gradient(140deg,#0c1c2f,#07111e);border-radius:16px;padding:28px}
+.big-card h3{font-size:19px;margin-bottom:7px}
+.big-card>p{font-size:12px;color:var(--muted)}
+.uv-controls{display:flex;gap:10px;margin:22px 0}
+.uv-controls input{width:100%;min-width:0;background:#06101c;border:1px solid var(--line);border-radius:8px;padding:12px;color:white}
+.uv-result{display:flex;align-items:center;gap:22px;margin-top:20px}
+.uv-number{font-family:'Space Grotesk',sans-serif;font-size:67px;font-weight:700;line-height:1;color:var(--green)}
+.uv-risk{font-size:11px;color:var(--green);font-weight:700}
+.uv-meter{height:8px;background:linear-gradient(90deg,#70f5bd 0 20%,#f4e66c 20% 40%,#ffb15c 40% 60%,#ff7777 60% 80%,#bb83ff 80%);border-radius:8px;margin:24px 0 10px;position:relative}
+.uv-marker{position:absolute;left:12%;top:-5px;width:4px;height:18px;background:white;border:1px solid #06101c;box-shadow:0 0 8px #fff;transition:left .3s}
+.tiny{font-size:10px;color:var(--muted)}
+.action-list{margin-top:19px;display:grid;gap:12px}
+.action-item{display:flex;gap:12px;font-size:12px;color:#d4e2ee;align-items:start}
+.check{color:var(--green);font-weight:bold}
+.science-stat{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.stat{background:#ffffff05;border:1px solid var(--line);padding:17px;border-radius:10px}
+.stat strong{font-family:'Space Grotesk',sans-serif;font-size:25px;color:var(--cyan);display:block}
+.stat small{font-size:10px;color:var(--muted)}
+.callout{margin-top:20px;border-left:2px solid var(--green);background:#70f5bd09;padding:13px 15px;font-size:11px;color:#b7d8cd;line-height:1.8}
+
+.science-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:35px;align-items:center}
+.atmosphere{height:340px;border-radius:16px;border:1px solid var(--line);background:radial-gradient(ellipse at 50% 100%,#153c62 0%,#09192b 42%,#050b16 73%);position:relative;overflow:hidden;display:flex;align-items:end;justify-content:center}
+.atmosphere:before{content:"";position:absolute;bottom:-115px;width:300px;height:230px;border-radius:50%;background:radial-gradient(ellipse,#44d9f4aa,#1c6caa44 48%,transparent 72%);filter:blur(8px)}
+.layer{position:absolute;left:12%;right:12%;border:1px solid #55eaff30;border-radius:50%;height:95px;transform:rotate(-9deg)}
+.layer-a{top:40px}.layer-b{top:83px;border-color:#70f5bd50}.layer-c{top:128px;border-color:#6095ff35}
+.earth-line{height:2px;position:absolute;bottom:75px;left:10%;right:10%;background:linear-gradient(90deg,transparent,#70f5bd,#55eaff,transparent);box-shadow:0 0 22px #55eaff}
+.atmo-label{position:absolute;left:18px;font-size:10px;color:#a5d7e8}
+.atmo-label.one{top:51px}.atmo-label.two{top:96px;color:var(--green)}.atmo-label.three{top:143px}
+.science-points{display:grid;gap:19px;margin-top:25px}
+.science-point{display:grid;grid-template-columns:35px 1fr;gap:13px}
+.point-num{width:32px;height:32px;display:grid;place-items:center;border:1px solid #55eaff45;color:var(--cyan);border-radius:9px;font-size:11px}
+.science-point h3{font-size:14px;margin:2px 0 5px}
+.science-point p{font-size:11px;color:var(--muted)}
+
+.assistant-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:20px}
+.assistant-intro{padding:15px 0}
+.assistant-box{border:1px solid #55eaff30;background:#081626;border-radius:16px;overflow:hidden}
+.assistant-top{padding:17px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}
+.assistant-top .card-icon{margin:0;width:37px;height:37px;font-size:18px}
+.assistant-top strong{font-size:13px}
+.assistant-top small{display:block;color:var(--green);font-size:10px}
+.chat-body{padding:20px;min-height:220px;max-height:300px;overflow:auto;display:grid;align-content:start;gap:12px}
+.message{padding:12px 14px;border-radius:10px;font-size:12px;line-height:1.8;max-width:95%;white-space:pre-wrap}
+.bot{background:#11243a;border:1px solid var(--line);color:#d5e7f6;justify-self:start}
+.user{background:#123e4a;color:#e5fdff;justify-self:end}
+.chat-input{padding:13px;display:flex;gap:8px;border-top:1px solid var(--line)}
+.chat-input input{flex:1;min-width:0;background:#050d18;border:1px solid var(--line);border-radius:8px;padding:11px;color:white;font-size:12px}
+.chat-input button{background:var(--cyan);color:#04101a;border:0;border-radius:8px;padding:0 17px;font-weight:700}
+.suggestions{display:flex;gap:7px;flex-wrap:wrap;padding:0 18px 16px}
+.suggestion{border:1px solid var(--line);border-radius:20px;padding:6px 10px;background:transparent;color:#b7d4e4;font-size:10px}
+
+.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.product-card{background:#0a1727;border:1px solid var(--line);border-radius:13px;padding:21px}
+.product-card .symbol{font-size:26px;margin-bottom:13px}
+.product-card h3{font-size:16px;margin-bottom:9px}
+.product-card p{font-size:11px;color:var(--muted);line-height:1.8}
+.pill{display:inline-block;font-size:9px;color:var(--green);background:#70f5bd0c;border:1px solid #70f5bd25;border-radius:5px;padding:5px 8px;margin-top:13px}
+
+.quiz-layout{display:grid;grid-template-columns:1fr .7fr;gap:18px}
+.quiz-card{background:linear-gradient(145deg,#0c1b2d,#08111e);border:1px solid var(--line);border-radius:16px;padding:28px}
+.quiz-progress{height:4px;background:#ffffff12;border-radius:5px;margin:20px 0}
+.quiz-progress div{height:100%;background:var(--cyan);width:0;transition:.3s;border-radius:5px}
+.quiz-question{font-size:19px;margin:20px 0}
+.answers{display:grid;gap:10px}
+.answer{background:#ffffff04;color:#d5e5f1;border:1px solid var(--line);border-radius:9px;padding:13px;text-align:left;font-size:12px;transition:.2s}
+.answer:hover{border-color:var(--cyan)}
+.answer.correct{border-color:var(--green);background:#70f5bd13}
+.answer.wrong{border-color:#ff7b86;background:#ff7b8610}
+.quiz-side{display:grid;gap:15px}
+.score-box{border:1px solid var(--line);border-radius:14px;background:#0a1727;padding:22px}
+.score-box strong{font-family:'Space Grotesk',sans-serif;font-size:37px;display:block;color:var(--green)}
+.score-box p{font-size:11px;color:var(--muted)}
+.quiz-feedback{font-size:12px;color:var(--green);margin-top:15px;min-height:22px}
+.reset-btn{margin-top:17px;background:transparent;border:1px solid var(--line);border-radius:7px;padding:9px 13px;color:white;font-size:11px}
+
+.final-cta{padding:65px 25px;text-align:center;border:1px solid #55eaff35;border-radius:20px;background:radial-gradient(ellipse at 50% 0%,#16405a80,transparent 65%),#081321}
+.final-cta h2{font-size:clamp(30px,5vw,50px);margin:17px auto;max-width:700px}
+.final-cta p{font-size:13px;color:var(--muted);max-width:540px;margin:0 auto 25px}
+footer{padding:32px 0;border-top:1px solid var(--line);margin-top:80px}
+.footer-row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+footer p,footer small{font-size:10px;color:var(--muted)}
+footer strong{color:#e8f7ff}
+.disclaimer{margin-top:16px;max-width:760px;line-height:1.8}
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#132a3b;border:1px solid #55eaff60;color:white;padding:12px 18px;border-radius:9px;font-size:12px;transition:.3s;z-index:300}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .65s,transform .65s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:850px){
+ nav{gap:13px}nav a{font-size:11px}
+ .hero{grid-template-columns:1fr;padding-top:65px}.hero-copy{max-width:680px}
+ .earth-stage{min-height:390px}
+ .grid{grid-template-columns:repeat(2,1fr)}
+ .dashboard,.science-layout,.assistant-layout,.quiz-layout{grid-template-columns:1fr}
+ .product-grid{grid-template-columns:repeat(2,1fr)}
+ .science-layout{gap:25px}
+}
+@media(max-width:600px){
+ .nav{height:66px}.menu-btn{display:block}
+ nav{display:none;position:absolute;top:66px;left:0;right:0;padding:20px 5%;background:#07111e;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch}
+ nav.open{display:flex}nav a{padding:8px 0}
+ .nav-cta{display:none}
+ .hero{padding:58px 0 55px;min-height:auto}
+ h1{letter-spacing:-2px;font-size:47px}
+ .hero p{font-size:13px}
+ .earth-stage{min-height:335px}
+ .float-label{padding:9px 11px}.label-one{right:-3px}.label-two{left:-3px}
+ .section{padding:68px 0}
+ .section-head{display:block}.section-head p{margin-top:15px}
+ .grid,.product-grid{grid-template-columns:1fr}
+ .card{padding:21px}
+ .big-card{padding:20px}
+ .uv-result{gap:15px}.uv-number{font-size:57px}
+ .science-stat{grid-template-columns:1fr 1fr}
+ .atmosphere{height:280px}
+ .quiz-card{padding:20px}
+ .hero-meta{gap:18px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+ .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#home" aria-label="Ozone Guard AI home">
+      <span class="brand-icon">◉</span>
+      <span>OZONE GUARD <span style="color:var(--cyan)">AI</span><small>ENVIRONMENTAL INTELLIGENCE</small></span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <nav id="navigation">
+      <a href="#intelligence">Intelligence</a>
+      <a href="#uv">UV Shield</a>
+      <a href="#science">The Science</a>
+      <a href="#assistant">Knowledge AI</a>
+      <a href="#action">EcoAction</a>
+    </nav>
+    <a class="nav-cta" href="#action">TAKE THE CHALLENGE ↗</a>
+  </div>
+</header>
+
+<main>
+<section class="wrap hero" id="home">
+  <div class="hero-copy">
+    <div class="eyebrow"><span class="dot"></span> OZONE DAY · 2026</div>
+    <h1>ONE PLANET.<br>ONE <span>ATMOSPHERE.</span><br>OUR FUTURE.</h1>
+    <p>
+      The ozone layer protects life on Earth. Explore the science, understand UV risks,
+      discover responsible environmental choices, and turn awareness into meaningful action.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#intelligence">EXPLORE THE PLATFORM ↗</a>
+      <a class="btn btn-secondary" href="#action">TAKE THE CHALLENGE ↓</a>
+    </div>
+    <div class="hero-meta">
+      <div><strong>01</strong><small>UNDERSTAND</small></div>
+      <div><strong>02</strong><small>MAKE INFORMED CHOICES</small></div>
+      <div><strong>03</strong><small>TAKE ACTION</small></div>
+    </div>
+  </div>
+  <div class="earth-stage" aria-label="Illustration of Earth and its atmosphere">
+    <div class="orbit"></div><div class="orbit2"></div><div class="earth"></div>
+    <div class="float-label label-one"><strong>ATMOSPHERE</strong>Our planet's protective shield</div>
+    <div class="float-label label-two"><strong>OZONE GUARD // 2026</strong>Knowledge into action</div>
+  </div>
+</section>
+
+<section class="section" id="intelligence">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><div class="kicker">01 / ENVIRONMENTAL INTELLIGENCE</div><h2>Understand the bigger picture.</h2></div>
+      <p>Explore the environmental issues, science, and everyday decisions connected to ozone protection.</p>
+    </div>
+    <div class="grid">
+      <article class="card reveal">
+        <div class="card-icon">🛰️</div><span class="tag">ATMOSPHERE</span>
+        <h3>Ozone Intelligence</h3>
+        <p>Discover stratospheric ozone, ozone depletion, atmospheric monitoring, and the international work protecting our planet.</p>
+        <a class="card-link" href="#science">EXPLORE THE SCIENCE ↗</a>
+      </article>
+      <article class="card reveal">
+        <div class="card-icon">☀️</div><span class="tag">PERSONAL SAFETY</span>
+        <h3>UV Shield</h3>
+        <p>Explore the UV index, understand exposure risks, and learn practical ways to protect yourself from excessive ultraviolet radiation.</p>
+        <a class="card-link" href="#uv">OPEN UV EXPLORER ↗</a>
+      </article>
+      <article class="card reveal">
+        <div class="card-icon">🧊</div><span class="tag">SMARTER CHOICES</span>
+        <h3>EcoProduct Intelligence</h3>
+        <p>Learn how refrigerants differ in ozone-depletion potential, climate impact, and the environmental considerations of cooling technology.</p>
+        <a class="card-link" href="#products">EXPLORE REFRIGERANTS ↗</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="uv">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><div class="kicker">02 / PERSONAL UV PROTECTION</div><h2>Make sunlight safer.</h2></div>
+      <p>Explore how UV index values relate to exposure risk. This interactive tool uses demonstration values, not live weather measurements.</p>
+    </div>
+    <div class="dashboard">
+      <div class="big-card reveal">
+        <span class="tag">INTERACTIVE EXPLORER · DEMO</span>
+        <h3>UV Risk Simulator</h3>
+        <p>Enter a UV index from 0 to 11+. The result updates instantly.</p>
+        <div class="uv-controls">
+          <input id="uvInput" type="number" min="0" max="15" step="1" value="8" aria-label="Enter UV index" placeholder="UV index">
+          <button class="btn btn-primary" id="checkUV">ANALYSE</button>
+        </div>
+        <div class="uv-result">
+          <div class="uv-number" id="uvNumber">8</div>
+          <div><div class="uv-risk" id="uvRisk">VERY HIGH</div><div class="tiny" id="uvSummary">Protection is essential.</div></div>
+        </div>
+        <div class="uv-meter"><div class="uv-marker" id="uvMarker"></div></div>
+        <div class="tiny">LOW 0–2 · MODERATE 3–5 · HIGH 6–7 · VERY HIGH 8–10 · EXTREME 11+</div>
+        <div class="action-list" id="uvActions">
+          <div class="action-item"><span class="check">✓</span> Seek shade when possible.</div>
+          <div class="action-item"><span class="check">✓</span> Wear protective clothing and sunglasses.</div>
+          <div class="action-item"><span class="check">✓</span> Use broad-spectrum sunscreen and reapply as directed.</div>
+        </div>
+      </div>
+      <div class="big-card reveal">
+        <span class="tag">WHY IT MATTERS</span>
+        <h3>Ozone. UV. Human health.</h3>
+        <p>The ozone layer absorbs much of the Sun's harmful UV radiation. Ozone depletion can increase UV-B exposure at Earth's surface.</p>
+        <div class="science-stat">
+          <div class="stat"><strong>UV-B</strong><small>Can damage skin and eyes</small></div>
+          <div class="stat"><strong>UVI</strong><small>Scale for sunburn-effective UV</small></div>
+          <div class="stat"><strong>SPF</strong><small>One part of sun protection</small></div>
+          <div class="stat"><strong>SHADE</strong><small>Helps reduce direct exposure</small></div>
+        </div>
+        <div class="callout">UV index is affected by factors including solar elevation, cloud conditions, altitude, and location. Ozone depletion is not the only factor that determines today's UV level.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="science">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><div class="kicker">03 / THE SCIENCE</div><h2>Meet Earth's protective shield.</h2></div>
+      <p>Understand where ozone exists, how depletion happens, and why international cooperation matters.</p>
+    </div>
+    <div class="science-layout">
+      <div class="atmosphere reveal" aria-label="Conceptual illustration of atmospheric layers">
+        <div class="layer layer-a"></div><div class="layer layer-b"></div><div class="layer layer-c"></div>
+        <span class="atmo-label one">STRATOSPHERE</span>
+        <span class="atmo-label two">OZONE-RICH REGION</span>
+        <span class="atmo-label three">ATMOSPHERIC LAYERS</span>
+        <div class="earth-line"></div>
+      </div>
+      <div class="reveal">
+        <span class="tag">THE ESSENTIALS</span>
+        <div class="science-points">
+          <div class="science-point"><div class="point-num">01</div><div><h3>What is the ozone layer?</h3><p>A region of the stratosphere with relatively high ozone concentrations. It absorbs most incoming harmful UV-B radiation.</p></div></div>
+          <div class="science-point"><div class="point-num">02</div><div><h3>What causes depletion?</h3><p>Certain human-made substances, including CFCs and halons, release chlorine or bromine in the stratosphere, which catalytically destroys ozone.</p></div></div>
+          <div class="science-point"><div class="point-num">03</div><div><h3>What is the Montreal Protocol?</h3><p>An international agreement adopted in 1987 to phase out ozone-depleting substances. It has helped put the ozone layer on a path to recovery.</p></div></div>
+          <div class="science-point"><div class="point-num">04</div><div><h3>Is ozone depletion the same as global warming?</h3><p>No. They are different problems, although some ozone-depleting substances are also powerful greenhouse gases.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="assistant">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><div class="kicker">04 / KNOWLEDGE CENTRE</div><h2>Curiosity meets science.</h2></div>
+      <p>Ask a question and explore a curated environmental knowledge base. This offline assistant does not use a live AI model.</p>
+    </div>
+    <div class="assistant-layout">
+      <div class="assistant-intro reveal">
+        <div class="card-icon">✳</div>
+        <h3 style="font-size:28px;margin-bottom:15px">Meet your ozone knowledge assistant.</h3>
+        <p style="font-size:13px;color:var(--muted);line-height:1.9">From the chemistry of CFCs to everyday UV safety, explore environmental science in accessible language. Try one of the suggested questions or type your own.</p>
+        <div class="callout">SCIENCE FIRST: Answers are selected from a curated educational knowledge base, not generated by a live AI model.</div>
+      </div>
+      <div class="assistant-box reveal">
+        <div class="assistant-top"><div class="card-icon">✳</div><div><strong>OZONE KNOWLEDGE AI</strong><small>CURATED KNOWLEDGE MODE · ONLINE ACCESS NOT REQUIRED</small></div></div>
+        <div class="chat-body" id="chatBody" aria-live="polite">
+          <div class="message bot">Hello! I'm your Ozone Knowledge Assistant. Ask me about the ozone layer, CFCs, UV radiation, or environmental protection.</div>
+        </div>
+        <div class="suggestions">
+          <button class="suggestion" data-question="What is the ozone layer?">Ozone layer</button>
+          <button class="suggestion" data-question="How do CFCs damage ozone?">CFCs</button>
+          <button class="suggestion" data-question="How can I protect myself from UV?">UV safety</button>
+          <button class="suggestion" data-question="What is the Montreal Protocol?">Montreal Protocol</button>
+        </div>
+        <form class="chat-input" id="chatForm">
+          <input id="chatInput" placeholder="Ask an environmental question..." aria-label="Ask a question" autocomplete="off">
+          <button type="submit">ASK ↗</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="products">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><div class="kicker">05 / ECOPRODUCT INTELLIGENCE</div><h2>Think beyond the label.</h2></div>
+      <p>Different substances have different environmental properties. Learn the basics before making purchasing or servicing decisions.</p>
+    </div>
+    <div class="product-grid">
+      <article class="product-card reveal"><div class="symbol">❄️</div><h3>CFC Refrigerants</h3><p>Chlorofluorocarbons such as CFC-12 deplete stratospheric ozone and can have high global-warming potential. Their production and use have been heavily phased out under international controls, subject to applicable rules and exceptions.</p><span class="pill">OZONE-DEPLETING</span></article>
+      <article class="product-card reveal"><div class="symbol">🧪</div><h3>HCFC Refrigerants</h3><p>Hydrochlorofluorocarbons have lower ozone-depletion potential than many CFCs, but they still deplete ozone. They are also being phased out under international agreements.</p><span class="pill">TRANSITION SUBSTANCES</span></article>
+      <article class="product-card reveal"><div class="symbol">🌿</div><h3>Alternative Refrigerants</h3><p>Options such as HFOs, hydrocarbons, ammonia, and carbon dioxide have different climate, safety, efficiency, and equipment requirements. Some have low ozone-depletion potential, but not every alternative is suitable for every system.</p><span class="pill">EVALUATE EACH OPTION</span></article>
+    </div>
+    <div class="callout reveal" style="margin-top:18px">Safety note: Refrigerants can be flammable, toxic, or operate under high pressure. Installation, recovery, and servicing should be carried out by appropriately trained professionals using compatible equipment.</div>
+  </div>
+</section>
+
+<section class="section" id="action">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><div class="kicker">06 / LEARN · PLAY · ACT</div><h2>Make knowledge count.</h2></div>
+      <p>Test what you know about ozone protection. Earn points for correct answers and turn learning into action.</p>
+    </div>
+    <div class="quiz-layout">
+      <div class="quiz-card reveal">
+        <span class="tag">OZONE CHALLENGE · 5 QUESTIONS</span>
+        <div style="display:flex;justify-content:space-between;gap:10px;font-size:11px;color:var(--muted)"><span id="questionCount">QUESTION 1 OF 5</span><span id="questionPoints">+20 XP PER CORRECT ANSWER</span></div>
+        <div class="quiz-progress"><div id="quizProgress"></div></div>
+        <h3 class="quiz-question" id="quizQuestion">Which atmospheric layer contains the ozone layer?</h3>
+        <div class="answers" id="answers"></div>
+        <div class="quiz-feedback" id="quizFeedback" aria-live="polite"></div>
+        <button class="reset-btn" id="restartQuiz">↻ RESTART CHALLENGE</button>
+      </div>
+      <div class="quiz-side reveal">
+        <div class="score-box"><span class="kicker">YOUR SCORE</span><strong id="score">000 XP</strong><p>Earn 20 XP for every correct answer.</p></div>
+        <div class="score-box"><span class="kicker">YOUR ACHIEVEMENT</span><strong id="badge" style="font-size:23px">🌱 Explorer</strong><p id="badgeText">Start the challenge to earn your first achievement.</p></div>
+        <div class="score-box"><span class="kicker">YOUR MISSION</span><p style="margin-top:10px">Learn how ozone-depleting substances are controlled, understand UV protection, and share one science-based fact with a friend.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="final-cta reveal">
+      <div class="eyebrow" style="justify-content:center"><span class="dot"></span> THE FUTURE IS A SHARED RESPONSIBILITY</div>
+      <h2>Protecting our atmosphere starts with what we do next.</h2>
+      <p>Learn the science. Make informed choices. Encourage your community to care for the planet we share.</p>
+      <a class="btn btn-primary" href="#action">TAKE THE OZONE CHALLENGE ↗</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-row">
+      <div class="brand"><span class="brand-icon">◉</span><span>OZONE GUARD AI<small>ENVIRONMENTAL AWARENESS PLATFORM</small></span></div>
+      <p>Student project · Ozone Day 2026</p>
+    </div>
+    <div class="footer-row" style="margin-top:22px">
+      <p>Developed by <strong>Sabarish P.</strong> · B.Tech Information Technology</p>
+      <p>LEARN · UNDERSTAND · PROTECT</p>
+    </div>
+    <p class="disclaimer">Educational project. The UV explorer uses user-entered demonstration values and does not provide live UV observations. The knowledge assistant uses a curated offline knowledge base. The atmospheric illustration is conceptual, not a scientific measurement. Environmental information should be checked against authoritative sources before use in research or safety-critical decisions.</p>
+    <p style="margin-top:12px">Scientific references: <a href="https://ozone.unep.org/" target="_blank" rel="noopener noreferrer" style="color:var(--cyan)">UNEP Ozone Secretariat</a> · <a href="https://science.nasa.gov/earth/earth-observatory/" target="_blank" rel="noopener noreferrer" style="color:var(--cyan)">NASA Earth Observatory</a> · <a href="https://www.who.int/health-topics/ultraviolet-radiation" target="_blank" rel="noopener noreferrer" style="color:var(--cyan)">WHO UV Radiation</a> · <a href="https://www.epa.gov/ozone-layer-protection" target="_blank" rel="noopener noreferrer" style="color:var(--cyan)">US EPA Ozone Layer Protection</a></p>
+    <p style="margin-top:16px">© 2026 Ozone Guard AI · Built for awareness and action.</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+const menuBtn = $("menuBtn");
+const navigation = $("navigation");
+
+menuBtn.addEventListener("click", () => {
+  const open = navigation.classList.toggle("open");
+  menuBtn.setAttribute("aria-expanded", String(open));
+});
+navigation.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+  navigation.classList.remove("open");
+  menuBtn.setAttribute("aria-expanded", "false");
+}));
+
+// Reveal sections as they enter the viewport.
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.08});
+  document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+} else {
+  document.querySelectorAll(".reveal").forEach(el => el.classList.add("visible"));
+}
+
+let toastTimer;
+function toast(message) {
+  const el = $("toast");
+  el.textContent = message;
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove("show"), 2600);
+}
+
+// UV index demonstration simulator.
+function analyseUV() {
+  const input = $("uvInput");
+  if (input.value.trim() === "") {
+    toast("Enter a UV index between 0 and 15.");
+    input.focus();
+    return;
+  }
+  const uv = Number(input.value);
+  if (!Number.isFinite(uv) || uv < 0 || uv > 15) {
+    toast("Please enter a number from 0 to 15.");
+    return;
+  }
+
+  let risk, color, summary, actions;
+  if (uv < 3) {
+    risk = "LOW"; color = "#70f5bd";
+    summary = "Risk is generally low.";
+    actions = ["Enjoy outdoor activities responsibly.", "Use sun protection for extended exposure or when conditions warrant it."];
+  } else if (uv < 6) {
+    risk = "MODERATE"; color = "#f4e66c";
+    summary = "Protection is recommended.";
+    actions = ["Seek shade around midday when practical.", "Wear protective clothing, sunglasses, and sunscreen."];
+  } else if (uv < 8) {
+    risk = "HIGH"; color = "#ffb15c";
+    summary = "Unprotected exposure can cause harm.";
+    actions = ["Reduce time in direct sun around midday.", "Use shade, protective clothing, a hat, sunglasses, and sunscreen."];
+  } else if (uv < 11) {
+    risk = "VERY HIGH"; color = "#ff7777";
+    summary = "Protection is essential.";
+    actions = ["Avoid prolonged exposure during peak sunlight.", "Seek shade and use protective clothing, a hat, sunglasses, and sunscreen."];
+  } else {
+    risk = "EXTREME"; color = "#bb83ff";
+    summary = "Take extra precautions.";
+    actions = ["Minimise unprotected exposure, especially around solar noon.", "Use multiple forms of sun protection and follow local health advice."];
+  }
+
+  $("uvNumber").textContent = Number.isInteger(uv) ? uv : uv.toFixed(1);
+  $("uvNumber").style.color = color;
+  $("uvRisk").textContent = risk;
+  $("uvRisk").style.color = color;
+  $("uvSummary").textContent = summary;
+  $("uvMarker").style.left = (Math.min(uv, 15) / 15 * 100) + "%";
+  $("uvActions").replaceChildren(...actions.map(text => {
+    const row = document.createElement("div");
+    row.className = "action-item";
+    const icon = document.createElement("span");
+    icon.className = "check";
+    icon.textContent = "✓";
+    row.append(icon, document.createTextNode(text));
+    return row;
+  }));
+}
+$("checkUV").addEventListener("click", analyseUV);
+$("uvInput").addEventListener("keydown", e => {
+  if (e.key === "Enter") analyseUV();
+});
+
+// Curated educational knowledge base. This is not a generative AI service.
+const knowledge = [
+  {keys:["what is the ozone layer","ozone layer","ozone"], answer:"The ozone layer is a region of the stratosphere with relatively high ozone concentrations. It absorbs most of the Sun's harmful UV-B radiation, helping protect people, animals, and ecosystems. Ozone near the ground is a different issue: it is an air pollutant."},
+  {keys:["cfc","chlorofluorocarbon","damage ozone","depletion","destroy ozone"], answer:"CFCs can drift into the stratosphere, where ultraviolet radiation breaks them down and releases chlorine. Chlorine participates in catalytic reactions that destroy ozone molecules. Because these reactions can repeat, a single chlorine atom can destroy many ozone molecules."},
+  {keys:["uv","sunlight","sun safety","protect myself","protect skin","sunscreen"], answer:"Check the local UV index when reliable data is available. When UV levels are elevated, seek shade, wear protective clothing and a broad-brimmed hat, use UV-protective sunglasses, and apply broad-spectrum sunscreen as directed. No single measure offers complete protection."},
+  {keys:["montreal","protocol","international agreement"], answer:"The Montreal Protocol is an international agreement adopted in 1987 to control and phase out ozone-depleting substances. It has achieved broad international participation and has helped put the ozone layer on a path to recovery. Its success depends on continued compliance and monitoring."},
+  {keys:["global warming","climate change","greenhouse"], answer:"Ozone depletion and climate change are different problems. Ozone depletion involves the loss of stratospheric ozone and can increase harmful UV exposure. Climate change is driven mainly by the buildup of greenhouse gases. Some ozone-depleting substances are also powerful greenhouse gases."},
+  {keys:["refriger","air conditioner","cooling","refrigerant"], answer:"Some older refrigerants, especially CFCs and HCFCs, deplete stratospheric ozone. Alternative refrigerants differ in climate impact, safety, energy efficiency, and equipment requirements. Have cooling equipment serviced by qualified professionals who can recover refrigerants safely."},
+  {keys:["halon","fire suppression","fire extinguisher"], answer:"Some halons have very high ozone-depletion potential and have been controlled under the Montreal Protocol. Fire-suppression choices must always prioritise effective fire safety, applicable regulations, and appropriate professional advice."},
+  {keys:["student","college","what can i do","help","action","protect ozone"], answer:"Students can learn and share verified ozone science, use UV protection, understand the impact of cooling equipment, avoid releasing refrigerants, support responsible servicing and recovery, and organise evidence-based awareness activities. Small actions help build informed communities."},
+  {keys:["ozone hole","antarctic"], answer:"The Antarctic ozone hole is a seasonal, severe thinning of the stratospheric ozone layer over Antarctica, especially during Southern Hemisphere spring. Very cold stratospheric conditions and polar stratospheric clouds enable reactions that activate chlorine and bromine. It is not a literal hole in the atmosphere."},
+  {keys:["ground level","ground-level","troposphere"], answer:"Stratospheric ozone protects life by absorbing harmful UV radiation. Ground-level ozone is an air pollutant that forms through reactions involving other pollutants in sunlight and can harm human health and vegetation. Location matters when discussing ozone."}
+];
+
+function getAnswer(question) {
+  const q = question.toLowerCase().replace(/[^\w\s-]/g, " ");
+  let best = null, bestScore = 0;
+  knowledge.forEach(item => {
+    let score = 0;
+    item.keys.forEach(key => {
+      if (q.includes(key)) score += key.includes(" ") ? 3 : 2;
+    });
+    if (score > bestScore) { bestScore = score; best = item; }
+  });
+  if (best && bestScore > 0) return best.answer;
+  return "I couldn't find a close match in my curated knowledge base. Try asking about the ozone layer, CFCs, the ozone hole, the Montreal Protocol, UV safety, refrigerants, or climate change. This demo assistant does not access a live AI service.";
+}
+
+function addMessage(text, type) {
+  const node = document.createElement("div");
+  node.className = "message " + type;
+  node.textContent = text;
+  $("chatBody").appendChild(node);
+  $("chatBody").scrollTop = $("chatBody").scrollHeight;
+}
+function askQuestion(question) {
+  const q = question.trim();
+  if (!q) return;
+  addMessage(q, "user");
+  addMessage(getAnswer(q), "bot");
+  $("chatInput").value = "";
+}
+$("chatForm").addEventListener("submit", e => {
+  e.preventDefault();
+  askQuestion($("chatInput").value);
+});
+document.querySelectorAll(".suggestion").forEach(button => {
+  button.addEventListener("click", () => askQuestion(button.dataset.question));
+});
+
+// Five-question knowledge challenge.
+const questions = [
+  {q:"Which atmospheric layer contains the ozone layer?", a:["Troposphere","Stratosphere","Mesosphere","Thermosphere"], correct:1, explain:"The ozone layer is located in the stratosphere."},
+  {q:"What is one major cause of human-induced ozone depletion?", a:["Oxygen from trees","CFCs and related substances","Wind turbines","Water vapour alone"], correct:1, explain:"CFCs can release chlorine in the stratosphere, which destroys ozone through catalytic reactions."},
+  {q:"What does the ozone layer absorb?", a:["All visible light","Most harmful UV-B radiation","All sunlight","All infrared radiation"], correct:1, explain:"Stratospheric ozone absorbs most incoming UV-B radiation."},
+  {q:"When was the Montreal Protocol adopted?", a:["1972","1987","1999","2015"], correct:1, explain:"The Montreal Protocol was adopted in 1987."},
+  {q:"Are ozone depletion and global warming exactly the same problem?", a:["Yes, they are identical","No, they are distinct but connected issues","Ozone has no atmospheric role","Global warming creates the ozone layer"], correct:1, explain:"They are distinct environmental issues, although some ozone-depleting substances are also greenhouse gases."}
+];
+
+let questionIndex = 0;
+let xp = 0;
+let answered = false;
+let completed = false;
+
+function renderQuiz() {
+  const q = questions[questionIndex];
+  answered = false;
+  $("questionCount").textContent = `QUESTION ${questionIndex + 1} OF ${questions.length}`;
+  $("quizProgress").style.width = (questionIndex / questions.length * 100) + "%";
+  $("quizQuestion").textContent = q.q;
+  $("quizFeedback").textContent = "";
+  $("answers").replaceChildren();
+
+  q.a.forEach((answer, index) => {
+    const btn = document.createElement("button");
+    btn.className = "answer";
+    btn.textContent = String.fromCharCode(65 + index) + ".  " + answer;
+    btn.addEventListener("click", () => chooseAnswer(index, btn));
+    $("answers").appendChild(btn);
+  });
+}
+function updateScore() {
+  $("score").textContent = String(xp).padStart(3, "0") + " XP";
+  const correct = xp / 20;
+  if (completed && correct === 5) {
+    $("badge").textContent = "🏆 Ozone Champion";
+    $("badgeText").textContent = "Perfect score! You've mastered this challenge.";
+  } else if (correct >= 3) {
+    $("badge").textContent = "🌿 Eco Protector";
+    $("badgeText").textContent = "Great progress. Keep building your environmental knowledge.";
+  } else if (correct >= 1) {
+    $("badge").textContent = "🌱 Eco Learner";
+    $("badgeText").textContent = "You're on your way. Keep learning and exploring.";
+  } else {
+    $("badge").textContent = "🌱 Explorer";
+    $("badgeText").textContent = "Start the challenge to earn your first achievement.";
+  }
+}
+function chooseAnswer(index, button) {
+  if (answered || completed) return;
+  answered = true;
+  const q = questions[questionIndex];
+  document.querySelectorAll(".answer").forEach((el, i) => {
+    el.disabled = true;
+    if (i === q.correct) el.classList.add("correct");
+  });
+  if (index === q.correct) {
+    xp += 20;
+    $("quizFeedback").textContent = "✓ Correct! " + q.explain;
+  } else {
+    button.classList.add("wrong");
+    $("quizFeedback").textContent = "Not quite. " + q.explain;
+  }
+  updateScore();
+  $("questionPoints").textContent = "ANSWER RECORDED";
+  const next = document.createElement("button");
+  next.className = "btn btn-primary";
+  next.style.marginTop = "16px";
+  next.textContent = questionIndex === questions.length - 1 ? "SEE RESULTS ↗" : "NEXT QUESTION →";
+  next.addEventListener("click", () => {
+    if (questionIndex < questions.length - 1) {
+      questionIndex++;
+      $("questionPoints").textContent = "+20 XP PER CORRECT ANSWER";
+      renderQuiz();
+    } else {
+      completed = true;
+      $("quizProgress").style.width = "100%";
+      $("questionCount").textContent = "CHALLENGE COMPLETED";
+      $("quizQuestion").textContent = `You scored ${xp} out of 100 XP!`;
+      $("answers").replaceChildren();
+      $("quizFeedback").textContent = xp === 100
+        ? "Outstanding! You are an Ozone Champion."
+        : "Great effort! Review the science section and try again to improve your score.";
+      next.remove();
+      updateScore();
+    }
+  });
+  $("answers").appendChild(next);
+}
+$("restartQuiz").addEventListener("click", () => {
+  questionIndex = 0; xp = 0; completed = false;
+  $("questionPoints").textContent = "+20 XP PER CORRECT ANSWER";
+  updateScore(); renderQuiz();
+});
+renderQuiz();
+updateScore();
+analyseUV();
+</script>
+</body>
+</html>
